@@ -1,0 +1,44 @@
+{{!< default}}
+
+<article class="{{post_class}}">
+    {{! Everything inside the #post tags pulls data from the post }}
+
+    {{#post}}
+    
+    <header class="post-header">
+      <h1 class="post-title">{{title}}</h1>
+      <section class="post-meta">
+          <time class="post-date" datetime="{{date format='YYYY-MM-DD'}}">{{date format="MMMM DD, YYYY"}}</time>
+          <span class="tags">{{tags}}</span>
+      </section>
+      {{#if image}}<img class="post-image" src="{{image}}">{{/if}}
+  </header>
+
+
+  {{#has tag="gallery"}}
+    {{> photoswipe}}
+    <section class="post-content post-gallery">
+    {{content}}
+    </section>
+    <link rel="stylesheet" href="{{asset "css/photoswipe.css"}}">
+    <script type="text/javascript" src="{{asset "js/photoswipe.min.js"}}"></script>
+    <script type="text/javascript" src="{{asset "js/photoswipe-ui-default.min.js"}}"></script>
+  {{else}}
+    <section class="post-content">
+      {{content}}
+    </section>
+  {{/has}}
+
+  <footer class="post-footer">
+        <div class="more-posts">
+        {{#next_post}}
+            <span class="pull-left"><a href="{{url}}">⇠  {{title}}</a></span>
+        {{/next_post}}
+        {{#prev_post}}
+        <span class="pull-right"><a href="{{url}}">{{title}} ⇢ </a></span>
+        {{/prev_post}}
+        </div>
+  </footer>
+
+  {{/post}}
+</article>
